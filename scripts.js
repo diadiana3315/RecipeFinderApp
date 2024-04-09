@@ -110,23 +110,28 @@ function generateHTML(results){
 
 document.addEventListener('DOMContentLoaded', function() {
     // Select all elements with the class 'filter-option'
-    const filterOptions = document.querySelectorAll('.filter-option');
+    const dropdowns = document.querySelectorAll('.dropdown');
 
-    // Add event listeners to each filter option
-    filterOptions.forEach(option => {
-        option.addEventListener('click', function() {
-            const value = this.textContent;
-            show(value);
+    // Add event listeners to each dropdown
+    dropdowns.forEach(dropdown => {
+        // Select filter options within each dropdown
+        const filterOptions = dropdown.querySelectorAll('.filter-option');
+
+        // Add event listeners to each filter option
+        filterOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const value = this.textContent;
+                show(value);
+            });
         });
-    });
 
-    // Define the show function
-    function show(value) {
-        document.querySelector('.textBox').value = value;
-    }
-    let dropdown = document.querySelector('.dropdown');
-    dropdown.onclick = function() {
-        dropdown.classList.toggle('active');
-    }
+        // Define the show function
+        function show(value) {
+            dropdown.querySelector('.textBox').value = value;
+        }
+        dropdown.onclick = function() {
+            dropdown.classList.toggle('active');
+        }
+    });
 });
 
