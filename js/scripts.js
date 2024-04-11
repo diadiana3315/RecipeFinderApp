@@ -1,4 +1,3 @@
-import { addToFavorites } from './login.js';
 // add ingredient search bar
 document.addEventListener('DOMContentLoaded', function() {
     const addButton = document.querySelector('#add-ingredient')
@@ -44,10 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 // ----------------------------------------------------------------------------------------
 // API call
-const searchForm = document.querySelector('form');
-const searchResultDiv = document.querySelector('.search-result');
 const container = document.querySelector('.container');
-let searchQuery = '';
 const APP_ID = '06fd947f';
 const APP_KEY = '74a178d35a849d31def7a5b2eea61e74';
 
@@ -67,7 +63,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const filteredRecipes = await fetchRecipes(ingredients, cuisineType, mealType, dietType);
         console.log("Filtered recipes:", filteredRecipes);
-        // Display filtered recipes
         displayRecipes(filteredRecipes);
 
         resetSearchBar();
@@ -95,7 +90,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const filterTextBoxes = document.querySelectorAll('.dropdown .textBox');
     filterTextBoxes.forEach(textBox => {
         textBox.addEventListener('click', function() {
-            // Clear the value when clicking on the filter text box
             this.value = '';
         });
     });
@@ -104,7 +98,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 async function fetchRecipes(ingredients, cuisineType, mealType, dietType) {
-    // const baseURL = `https://api.edamam.com/search?q=${searchQuery}&app_id=${APP_ID}&app_key=${APP_KEY}&to=20`;
     const baseURL = `https://api.edamam.com/search?q=${encodeURIComponent(ingredients.join('+'))}&app_id=${APP_ID}&app_key=${APP_KEY}&to=20`;
 
     try {
@@ -119,7 +112,6 @@ async function fetchRecipes(ingredients, cuisineType, mealType, dietType) {
                 recipe.ingredients.some(item => item.text.toLowerCase().includes(ingredient.toLowerCase()))
             );
 
-            // Check if cuisineType, mealType, and dietType match
             const isCuisineMatch = !cuisineType || recipe.cuisineType.includes(cuisineType);
             const isMealTypeMatch = !mealType || recipe.mealType.includes(mealType);
             const isDietTypeMatch = !dietType || recipe.healthLabels.includes(dietType);
@@ -171,10 +163,8 @@ function displayRecipes(filteredRecipes) {
 // ----------------------------------------------------------------------------------------
 // filter dropdowns
 document.addEventListener('DOMContentLoaded', function() {
-    // Select all elements with the class 'filter-option'
     const dropdowns = document.querySelectorAll('.dropdown');
 
-    // Add event listeners to each dropdown
     dropdowns.forEach(dropdown => {
         // Select filter options within each dropdown
         const filterOptions = dropdown.querySelectorAll('.filter-option');
@@ -187,7 +177,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-        // Define the show function
         function show(value) {
             dropdown.querySelector('.textBox').value = value;
         }
@@ -197,32 +186,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// ----------------------------------------------------------------------------------------
-// JavaScript
-document.addEventListener('DOMContentLoaded', function() {
-    // Select the heart icon
-    const heartIcon = document.getElementById('heart-icon');
-
-    // Add click event listener to the heart icon
-    heartIcon.addEventListener('click', function() {
-        // Redirect to the favorites page
-        window.location.href = 'favorites.html';
-    });
-});
-
-// ----------------------------------------------------------------------------------------
-document.addEventListener('DOMContentLoaded', function() {
-    // Select the heart icon
-    const heartIcon = document.getElementById('heart-icon');
-
-    // Add click event listener to the heart icon
-    heartIcon.addEventListener('click', function() {
-        // Get the recipe label
-        const recipeLabel = this.parentNode.querySelector('.title').textContent;
-
-        // Add the recipe to favorites
-        addToFavorites(recipeLabel);
-    });
-});
-
-// ----------------------------------------------------------------------------------------

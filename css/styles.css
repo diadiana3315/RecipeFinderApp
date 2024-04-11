@@ -9,12 +9,11 @@ img{
     object-fit: cover;
 }
 html{
-    font-family: "Verdana", sans-serif;
+    font-family: "Segoe UI", sans-serif;
     font-size: 12px;
     font-weight: 400;
 }
 body {
-    font-family: "Verdana", sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -25,10 +24,6 @@ section{
     min-height: 100vh;
     width: 100%;
     padding: 100px 0;
-    /*background-color: #f5f3e8;*/
-    /*background-color: #ffd733;*/
-    /*background-color: rgb(138, 154, 91);*/
-    /*background-color: #c7e868;*/
     background-color: #d9eb6b;
 }
 .container{
@@ -47,8 +42,6 @@ form{
     width: 90%;
     max-width: 490px;
     margin: 20px auto;
-    /*background-color: #f5f3e8;*/
-    /*background-color: #28282B;*/
     border-radius: 4px;
     align-content: center;
     justify-content: center;
@@ -196,28 +189,28 @@ form{
 
 @media screen and (max-width: 768px) {
     .dropdown {
-        width: 100%; /* Set to full width on smaller screens */
-        margin-right: 0; /* Remove right margin on smaller screens */
+        width: 100%;
+        margin-right: 0;
     }
 }
 
 
 .btn {
-    margin-right: 10px; /* Add space between buttons */
+    margin-right: 10px;
 }
 
 .btn.btn-primary {
-    background-color: rgb(240,140,0) !important; /* Change the background color of primary buttons */
-    border-color: rgb(240,140,0) !important; /* Change the border color of primary buttons */
+    background-color: rgb(240,140,0) !important;
+    border-color: rgb(240,140,0) !important;
 }
 
 .btn.btn-primary:hover {
-    background-color: rgb(240,125,0) !important; /* Change the background color of primary buttons on hover */
-    border-color: rgb(240,125,0) !important; /* Change the border color of primary buttons on hover */
+    background-color: rgb(240,125,0) !important;
+    border-color: rgb(240,125,0) !important;
 }
 
 .btn.btn-default {
-    background-color: rgba(240,140,0, 0.8) !important; /* Change the background color of default buttons */
+    background-color: rgba(240,140,0, 0.8) !important;
     color: whitesmoke;
     border: none;
 }
@@ -225,26 +218,5 @@ form{
 .btn.btn-default:hover {
     background-color: rgb(240,140,5) !important;
     color: whitesmoke;
-    border: none; /* Keep the border color of default buttons on hover */
-}
-
-ion-icon {
-    font-size: 40px;
-    margin-top: 20px;
-    color: whitesmoke;
-    position: absolute;
-    top: 20px; /* Adjust this value as needed */
-    right: 20px; /* Adjust this value as needed */
-    z-index: 1; /* Ensure it's above other content */
-}
-ion-icon:hover{
-    color: rgb(240,140,5);
-    cursor: pointer;
-}
-
-#filled-heart{
-    color: rgb(240,140,0);
-}
-#filled-heart:hover{
-    color: red;
+    border: none;
 }
