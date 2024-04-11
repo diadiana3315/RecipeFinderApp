@@ -1,6 +1,6 @@
 *{
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
     box-sizing: border-box;
 }
 img{
@@ -9,11 +9,12 @@ img{
     object-fit: cover;
 }
 html{
-    font-family: 'Arial';
+    font-family: "Verdana", sans-serif;
     font-size: 12px;
     font-weight: 400;
 }
 body {
+    font-family: "Verdana", sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -24,7 +25,11 @@ section{
     min-height: 100vh;
     width: 100%;
     padding: 100px 0;
-    background-color: rgb(220, 220, 220);
+    /*background-color: #f5f3e8;*/
+    /*background-color: #ffd733;*/
+    /*background-color: rgb(138, 154, 91);*/
+    /*background-color: #c7e868;*/
+    background-color: #d9eb6b;
 }
 .container{
     width: 90%;
@@ -34,18 +39,21 @@ section{
 }
 .brand{
     text-align: center;
-    font-size: 4rem;
+    font-size: 5rem;
     color: darkolivegreen;
     margin-bottom: 30px;
 }
 form{
     width: 90%;
-    max-width: 400px;
+    max-width: 490px;
     margin: 20px auto;
-    background-color: rgb(220, 220, 220);
+    /*background-color: #f5f3e8;*/
+    /*background-color: #28282B;*/
     border-radius: 4px;
+    align-content: center;
+    justify-content: center;
 }
-form-input{
+.form-input{
     width: 90%;
     background-color: transparent;
     padding: 10px;
@@ -54,25 +62,24 @@ form-input{
     font-size: 2rem;
     display: inline-block;
 }
-/*form ion-icon{*/
-/*    width: 9%;*/
-/*    font-size: 2rem;*/
-/*    margin: 2px;*/
-/*    color: darkolivegreen;*/
-/*}*/
+
 .search-result{
     margin-top: 50px;
     width: 100%;
     display: grid;
     grid-gap: 25px;
     grid-template: auto / repeat(auto-fit, minmax(300px, 1fr));
+    border-radius: 10px;
 }
 .item{
     width: 100%;
     border-right: 8px;
-    background-color: darkolivegreen;
+    background-color: rgba(85,107,47, 0.3);
     padding: 15px;
     overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(4px);
 }
 .item img{
     width: 100%;
@@ -95,11 +102,15 @@ form-input{
     text-align: center;
     width: 130px;
     padding: 10px 0;
-    background-color: olivedrab;
+    background-color: #a1ad2d;
     color: whitesmoke;
     font-size: 1.4rem;
     margin-top: 20px;
     align-self: flex-start;
+    border-radius: 5px;
+}
+.view-button:hover{
+    background-color: rgb(165,180,48);
 }
 .item-data{
     color: whitesmoke;
@@ -113,7 +124,8 @@ form-input{
     display: flex;
     justify-content: center;
     min-height: 10vh;
-    background-color: rgb(220, 220, 220);
+    /*background-color: #f5f3e8;*/
+    /*background-color: #28282B;*/
 }
 .dropdown{
     position: relative;
@@ -133,8 +145,8 @@ form-input{
     top: 15px;
     z-index: 10000;
     border: 2px solid #333;
-    border-top: 2px solid #fff;
-    border-right: 2px solid #fff;
+    border-top: 2px solid rgba(221, 221, 221, 0.8);
+    border-right: 2px solid rgba(221, 221, 221, 0.8);
     transform: rotate(-45deg);
     transition: 0.5s;
     pointer-events: none;
@@ -150,19 +162,20 @@ form-input{
     width: 100%;
     height: 100%;
     cursor: pointer;
-    background: #fff;
+    /*background: #fff;*/
     box-shadow: 0 5px 20px rgba(0,0,0,0.05);
     border: none;
     outline: none;
     padding: 12px 20px;
     border-radius: 10px;
+    background-color: rgba(221, 221, 221, 0.5);
 }
 .dropdown .option{
     position: absolute;
     top: 70px;
     width: 100%;
     max-height: 250px;
-    background: #fff;
+    background: rgb(238, 238, 238);
     box-shadow: 0 5px 20px rgba(0,0,0,0.05);
     border-radius: 10px;
     overflow-y: auto;
@@ -177,7 +190,7 @@ form-input{
     cursor: pointer;
 }
 .dropdown .option div:hover{
-    background: rgba(0,0,0,0.1);
+    background: rgba(240,140,0, 0.7);
     color: white;
 }
 
@@ -186,4 +199,45 @@ form-input{
         width: 100%; /* Set to full width on smaller screens */
         margin-right: 0; /* Remove right margin on smaller screens */
     }
+}
+
+
+.btn {
+    margin-right: 10px; /* Add space between buttons */
+}
+
+.btn.btn-primary {
+    background-color: rgb(240,140,0) !important; /* Change the background color of primary buttons */
+    border-color: rgb(240,140,0) !important; /* Change the border color of primary buttons */
+}
+
+.btn.btn-primary:hover {
+    background-color: rgb(240,125,0) !important; /* Change the background color of primary buttons on hover */
+    border-color: rgb(240,125,0) !important; /* Change the border color of primary buttons on hover */
+}
+
+.btn.btn-default {
+    background-color: rgba(240,140,0, 0.8) !important; /* Change the background color of default buttons */
+    color: whitesmoke;
+    border: none;
+}
+
+.btn.btn-default:hover {
+    background-color: rgb(240,140,5) !important;
+    color: whitesmoke;
+    border: none; /* Keep the border color of default buttons on hover */
+}
+
+ion-icon {
+    font-size: 40px;
+    margin-top: 20px;
+    color: whitesmoke;
+    position: absolute;
+    top: 20px; /* Adjust this value as needed */
+    right: 20px; /* Adjust this value as needed */
+    z-index: 1; /* Ensure it's above other content */
+}
+ion-icon:hover{
+    color: rgb(240,140,5);
+    cursor: pointer;
 }

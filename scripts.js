@@ -60,23 +60,17 @@ const APP_KEY = '74a178d35a849d31def7a5b2eea61e74';
 document.addEventListener('DOMContentLoaded', function() {
     const searchForm = document.querySelector('#search-form');
 
-    // Add event listener for form submission
     searchForm.addEventListener('submit', async function(e) {
         e.preventDefault();
 
-        // Get selected ingredients
         const ingredients = Array.from(document.querySelectorAll('input[name="ingredient"]'))
             .map(input => input.value)
             .filter(value => value.trim() !== '');
 
-        // Get selected filter options
         const cuisineType = document.querySelector('.container2 .dropdown:nth-of-type(1) .textBox').value.toLowerCase();
         const mealType = document.querySelector('.container2 .dropdown:nth-of-type(2) .textBox').value.toLowerCase();
         const dietType = document.querySelector('.container2 .dropdown:nth-of-type(3) .textBox').value;
-        // console.log("Selected cuisineType:", cuisineType);
-        // console.log("Selected mealType:", mealType);
-        // console.log("Selected dietType:", dietType);
-        // Fetch filteredRecipes from API
+
         const filteredRecipes = await fetchRecipes(ingredients, cuisineType, mealType, dietType);
         console.log("Filtered recipes:", filteredRecipes);
         // Display filtered recipes
@@ -168,6 +162,7 @@ function displayRecipes(filteredRecipes) {
                 <div class="flex-container">
                     <h1 class="title">${recipe.label}</h1>
                     <a class="view-button" href="${recipe.url}" target="_blank">View recipe</a>
+                    <ion-icon name="heart-outline" onclick="addToFavorites('${recipe.label}')"></ion-icon>
                 </div>
                 <p class="item-data">Cuisine type: ${recipe.cuisineType}</p>
                 <p class="item-data">Meal type: ${recipe.mealType}</p>
@@ -208,3 +203,65 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// ----------------------------------------------------------------------------------------
+// JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    // Select the heart icon
+    const heartIcon = document.getElementById('heart-icon');
+
+    // Add click event listener to the heart icon
+    heartIcon.addEventListener('click', function() {
+        // Redirect to the favorites page
+        window.location.href = 'favorites.html';
+    });
+});
+
+
+// function addToFavorites(recipeLabel) {
+//     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+//     const existingIndex = favorites.findIndex(fav => fav.label === recipeLabel);
+//
+//     if (existingIndex === -1) {
+//         favorites.push({ label: recipeLabel });
+//         localStorage.setItem('favorites', JSON.stringify(favorites));
+//         alert('Recipe added to favorites!');
+//     } else {
+//         alert('Recipe already in favorites!');
+//     }
+// }
+
+function addToFavorites(recipeLabel) {
+    const user = auth.currentUser; // Get the current user
+    if (!user) {
+        alert('Please log in to add favorites.');
+        return;
+    }
+
+    const userFavoritesRef = ref(database, 'userFavorites/' + user.uid); // Reference to the user's favorites
+
+    // Check if the recipe already exists in the user's favorites
+    get(userFavoritesRef)
+        .then((snapshot) => {
+            if (snapshot.exists()) {
+                const userFavorites = snapshot.val();
+                if (userFavorites.hasOwnProperty(recipeLabel)) {
+                    alert('Recipe already in favorites!');
+                    return;
+                }
+            }
+
+            // If the recipe doesn't exist, add it to the user's favorites
+            update(ref(userFavoritesRef), {
+                [recipeLabel]: true
+            }).then(() => {
+                alert('Recipe added to favorites!');
+            }).catch((error) => {
+                console.error('Error adding recipe to favorites:', error);
+                alert('Failed to add recipe to favorites.');
+            });
+        })
+        .catch((error) => {
+            console.error('Error checking user favorites:', error);
+            alert('Failed to add recipe to favorites.');
+        });
+}

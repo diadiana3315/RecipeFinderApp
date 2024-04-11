@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
-import { getDatabase, ref } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
+import { getDatabase, ref, set, update} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
 const firebaseConfig = {
     apiKey: "AIzaSyBL6pI6wXjNf04wc5qLMg6vMJP5rsKgxP4",
@@ -15,17 +15,19 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const auth = getAuth(app);
-const dbRef = ref(database);
 
-document.getElementById('registerBtn').addEventListener('click', function(){
-    register(auth);
-});
-document.getElementById('loginBtn').addEventListener('click', function(){
-    login(auth);
-});
+document.addEventListener('DOMContentLoaded', function () {
+    const registerBtn = document.getElementById('registerBtn');
+    const loginBtn = document.getElementById('loginBtn');
 
+    registerBtn.addEventListener('click', function() {
+        register(auth);
+    });
+    loginBtn.addEventListener('click', function() {
+        login(auth);
+    });
+});
 function register(auth) {
-    // let full_name = document.getElementById("full_name").value;
     let first_name = document.getElementById("firstNameInp").value;
     let last_name = document.getElementById("lastNameInp").value
     let email = document.getElementById("emailInput").value;
@@ -33,22 +35,24 @@ function register(auth) {
 
     if (validate_email(email) === false || validate_password(password) === false) {
         alert("Invalid email address or password. Please try again.");
+        return;
     }
     if(validate_field(first_name) === false || validate_field(last_name) === false || validate_field(email) === false || validate_field(password) === false) {
         alert("Please fill out all fields.");
+        return;
     }
 
     createUserWithEmailAndPassword(auth, email, password)
     .then(function (){
         var user = auth.currentUser;
-        var database_ref = dbRef;
         var user_data = {
             first_name: first_name,
             last_name: last_name,
             email: email,
             last_login: Date.now()
         }
-        database_ref.child('users/' + user.uid).set(user_data);
+        set(ref(database, 'users/' + user.uid), user_data)
+
         alert('User created successfully!');
     })
         .catch(function(error) {
@@ -58,22 +62,27 @@ function register(auth) {
 
 }
 
-function login(){
+function login(auth){
     let email = document.getElementById("emailInput").value;
     let password = document.getElementById("passwordInput").value;
+
     if (validate_email(email) === false || validate_password(password) === false) {
         alert("Invalid email address or password. Please try again.");
+        return;
     }
 
     signInWithEmailAndPassword(auth, email, password)
         .then(function (){
             var user = auth.currentUser;
-            var database_ref = dbRef;
             var user_data = {
                 last_login: Date.now()
             }
-            database_ref.child('users/' + user.uid).update(user_data);
+            update(ref(database, 'users/' + user.uid), user_data)
+
             alert('User logged in successfully!');
+            // window.location.href = 'https://webapp-7c9a3.web.app';
+            window.location.href = 'webapp.html';
+
         })
         .catch(function(error) {
             var errorMessage = error.message;

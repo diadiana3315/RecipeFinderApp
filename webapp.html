@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+</head>
+<body>
+<!--<header>-->
+<!--    <nav>-->
+<!--            <li><a href="favorites.html">My favorites</a></li>-->
+<!--    </nav>-->
+<!--</header>-->
+<section>
+    <ion-icon id="heart-icon" name="heart-outline"></ion-icon>
+    <div class="container">
+        <h1 class="brand">Recipe Finder</h1>
+        <form id="search-form">
+            <div id="ingredient-container">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="ingredient" placeholder="Enter ingredient...">
+                    <span class="input-group-btn">
+                    <button class="btn btn-default remove-ingredient" type="button">Remove</button>
+                </span>
+                </div>
+            </div>
+            <div class="container2">
+                <div class="dropdown">
+                    <input type="text" class="textBox"
+                           placeholder="Cuisine type" readonly>
+                    <div class="option">
+                        <div class="filter-option" value="american">American</div>
+                        <div class="filter-option" value="asian">Asian</div>
+                        <div class="filter-option" value="british">British</div>
+                        <div class="filter-option" value="caribbean">Caribbean</div>
+                        <div class="filter-option" value="central europe">Central Europe</div>
+                        <div class="filter-option" value="chinese">Chinese</div>
+                        <div class="filter-option" value="eastern europe">Eastern Europe</div>
+                        <div class="filter-option" value="french">French</div>
+                        <div class="filter-option" value="greek">Greek</div>
+                        <div class="filter-option" value="indian">Indian</div>
+                        <div class="filter-option" value="italian">Italian</div>
+                        <div class="filter-option" value="japanese">Japanese</div>
+                        <div class="filter-option" value="korean">Korean</div>
+                        <div class="filter-option" value="kosher">Kosher</div>
+                        <div class="filter-option" value="mediterranean">Mediterranean</div>
+                        <div class="filter-option" value="mexican">Mexican</div>
+                        <div class="filter-option" value="middle eastern">Middle Eastern</div>
+                        <div class="filter-option" value="nordic">Nordic</div>
+                        <div class="filter-option" value="south american">South American</div>
+                        <div class="filter-option" value="south east asian">South East Asian</div>
+                        <div class="filter-option" value="world">World</div>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <input type="text" class="textBox"
+                           placeholder="Meal type" readonly>
+                    <div class="option">
+                        <div class="filter-option" value="breakfast">Breakfast</div>
+                        <div class="filter-option" value="brunch">Brunch</div>
+                        <div class="filter-option" value="lunch/dinner">Lunch/dinner</div>
+                        <div class="filter-option" value="snack">Snack</div>
+                        <div class="filter-option" value="teatime">Teatime</div>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <input type="text" class="textBox"
+                           placeholder="Diet type" readonly>
+                    <div class="option">
+                        <div class="filter-option" value="Vegetarian">Vegetarian</div>
+                        <div class="filter-option" value="Vegan">Vegan</div>
+                        <div class="filter-option" value="Soy-Free">Soy-Free</div>
+                        <div  class="filter-option" value="Gluten-Free">Gluten-Free</div>
+                        <div class="filter-option" value="Dairy-Free">Dairy-Free</div>
+                        <div class="filter-option" value="Egg-Free">Egg-Free</div>
+                        <div class="filter-option" value="Alcohol-Free">Alcohol-Free</div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit">SEARCH</button>
+
+        </form>
+        <div class="search-result"></div>
+    </div>
+
+</section>
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+<script src="scripts.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
