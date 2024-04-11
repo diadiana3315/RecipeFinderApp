@@ -1,20 +1,13 @@
+import { addToFavorites } from './login.js';
 // add ingredient search bar
 document.addEventListener('DOMContentLoaded', function() {
-    const addButton = document.createElement('button');
-    addButton.textContent = 'Add Ingredient';
-    addButton.className = 'btn btn-primary';
-    addButton.type = 'button';
-    addButton.id = 'add-ingredient';
-
+    const addButton = document.querySelector('#add-ingredient')
     const ingredientContainer = document.getElementById('ingredient-container');
 
     addButton.addEventListener('click', function() {
         const inputGroup = createInputGroup();
         ingredientContainer.appendChild(inputGroup);
     });
-
-    const form = document.getElementById('search-form');
-    form.insertBefore(addButton, form.lastElementChild);
 
     function createInputGroup() {
         const inputGroup = document.createElement('div');
@@ -31,11 +24,12 @@ document.addEventListener('DOMContentLoaded', function() {
         removeButton.type = 'button';
         removeButton.textContent = 'Remove';
         removeButton.addEventListener('click', function() {
-            if (this.parentNode.parentNode.firstElementChild === this.parentNode){
-                inputField.value = '';
-            } else {
-                inputGroup.remove();
-            }
+            // if (this.parentNode.parentNode.firstElementChild === this.parentNode){
+            //     inputField.value = '';
+            // } else {
+            //     inputGroup.remove();
+            // }
+            inputGroup.remove();
         });
 
         const span = document.createElement('span');
@@ -162,7 +156,7 @@ function displayRecipes(filteredRecipes) {
                 <div class="flex-container">
                     <h1 class="title">${recipe.label}</h1>
                     <a class="view-button" href="${recipe.url}" target="_blank">View recipe</a>
-                    <ion-icon name="heart-outline" onclick="addToFavorites('${recipe.label}')"></ion-icon>
+                    <ion-icon id="filled-heart" name="heart" onclick="addToFavorites('${recipe.label}')"></ion-icon>
                 </div>
                 <p class="item-data">Cuisine type: ${recipe.cuisineType}</p>
                 <p class="item-data">Meal type: ${recipe.mealType}</p>
@@ -216,52 +210,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// ----------------------------------------------------------------------------------------
+document.addEventListener('DOMContentLoaded', function() {
+    // Select the heart icon
+    const heartIcon = document.getElementById('heart-icon');
 
-// function addToFavorites(recipeLabel) {
-//     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-//     const existingIndex = favorites.findIndex(fav => fav.label === recipeLabel);
-//
-//     if (existingIndex === -1) {
-//         favorites.push({ label: recipeLabel });
-//         localStorage.setItem('favorites', JSON.stringify(favorites));
-//         alert('Recipe added to favorites!');
-//     } else {
-//         alert('Recipe already in favorites!');
-//     }
-// }
+    // Add click event listener to the heart icon
+    heartIcon.addEventListener('click', function() {
+        // Get the recipe label
+        const recipeLabel = this.parentNode.querySelector('.title').textContent;
 
-function addToFavorites(recipeLabel) {
-    const user = auth.currentUser; // Get the current user
-    if (!user) {
-        alert('Please log in to add favorites.');
-        return;
-    }
+        // Add the recipe to favorites
+        addToFavorites(recipeLabel);
+    });
+});
 
-    const userFavoritesRef = ref(database, 'userFavorites/' + user.uid); // Reference to the user's favorites
-
-    // Check if the recipe already exists in the user's favorites
-    get(userFavoritesRef)
-        .then((snapshot) => {
-            if (snapshot.exists()) {
-                const userFavorites = snapshot.val();
-                if (userFavorites.hasOwnProperty(recipeLabel)) {
-                    alert('Recipe already in favorites!');
-                    return;
-                }
-            }
-
-            // If the recipe doesn't exist, add it to the user's favorites
-            update(ref(userFavoritesRef), {
-                [recipeLabel]: true
-            }).then(() => {
-                alert('Recipe added to favorites!');
-            }).catch((error) => {
-                console.error('Error adding recipe to favorites:', error);
-                alert('Failed to add recipe to favorites.');
-            });
-        })
-        .catch((error) => {
-            console.error('Error checking user favorites:', error);
-            alert('Failed to add recipe to favorites.');
-        });
-}
+// ----------------------------------------------------------------------------------------

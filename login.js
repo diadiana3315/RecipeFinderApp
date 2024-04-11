@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
-import { getDatabase, ref, set, update} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
+import { getDatabase, ref, set, update, get} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
 const firebaseConfig = {
     apiKey: "AIzaSyBL6pI6wXjNf04wc5qLMg6vMJP5rsKgxP4",
@@ -102,3 +102,39 @@ function validate_password(password) {
 function validate_field(field) {
     return field !== "";
 }
+
+// export function addToFavorites(recipeLabel) {
+//     const user = auth.currentUser; // Get the current user
+//     if (!user) {
+//         alert('Please log in to add favorites.');
+//         return;
+//     }
+//
+//     const userFavoritesRef = ref(database, 'userFavorites/' + user.uid); // Reference to the user's favorites
+//
+//     // Check if the recipe already exists in the user's favorites
+//     get(userFavoritesRef)
+//         .then((snapshot) => {
+//             if (snapshot.exists()) {
+//                 const userFavorites = snapshot.val();
+//                 if (userFavorites.hasOwnProperty(recipeLabel)) {
+//                     alert('Recipe already in favorites!');
+//                     return;
+//                 }
+//             }
+//
+//             // If the recipe doesn't exist, add it to the user's favorites
+//             update(ref(userFavoritesRef), {
+//                 [recipeLabel]: true
+//             }).then(() => {
+//                 alert('Recipe added to favorites!');
+//             }).catch((error) => {
+//                 console.error('Error adding recipe to favorites:', error);
+//                 alert('Failed to add recipe to favorites.');
+//             });
+//         })
+//         .catch((error) => {
+//             console.error('Error checking user favorites:', error);
+//             alert('Failed to add recipe to favorites.');
+//         });
+// }

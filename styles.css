@@ -241,3 +241,10 @@ ion-icon:hover{
     color: rgb(240,140,5);
     cursor: pointer;
 }
+
+#filled-heart{
+    color: rgb(240,140,0);
+}
+#filled-heart:hover{
+    color: red;
+}
