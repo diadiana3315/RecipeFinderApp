@@ -23,11 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
         removeButton.type = 'button';
         removeButton.textContent = 'Remove';
         removeButton.addEventListener('click', function() {
-            // if (this.parentNode.parentNode.firstElementChild === this.parentNode){
-            //     inputField.value = '';
-            // } else {
-            //     inputGroup.remove();
-            // }
             inputGroup.remove();
         });
 
@@ -144,11 +139,11 @@ function displayRecipes(filteredRecipes) {
 
         return `
             <div class="item">
+            
                 <img src="${recipe.image}" alt="Recipe Image">
                 <div class="flex-container">
                     <h1 class="title">${recipe.label}</h1>
                     <a class="view-button" href="${recipe.url}" target="_blank">View recipe</a>
-                    <ion-icon id="filled-heart" name="heart" onclick="addToFavorites('${recipe.label}')"></ion-icon>
                 </div>
                 <p class="item-data">Cuisine type: ${recipe.cuisineType}</p>
                 <p class="item-data">Meal type: ${recipe.mealType}</p>
